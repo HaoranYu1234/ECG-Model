@@ -1,2 +1,2 @@
-# ECG-Model-Result
-Here are the final result and waiting for improvements. This was my high school stuff
+# ECG-Model
+This project was one of my interal assessment, and I started this project during high school. In this project, I aim to use Fourier series to simulate human ECG signels. The math and the coding is currently under modifications. There are some math and coding error in the current version of the project. 

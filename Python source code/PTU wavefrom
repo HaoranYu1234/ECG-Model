@@ -1,0 +1,43 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+L = 30 / 72  # frequency
+
+# Parameters
+params = {
+    "pwav": [0.25, 0.09, 0.2],
+    "twav": [0.35, 0.142, 0.3],
+    "uwav": [0.035, 0.0476, 0.433]
+}
+
+
+def compute_wave(a, d, t, L, wave_type=""):
+    x = np.arange(0.01, 2.01, 0.01) + t
+    d /= 2
+    n = 100
+    a0 = 1 / L
+    an = 0
+    for i in range(1, n + 1):
+        an_term = -4 * d * L / (np.pi * (4 * d ** 2 * i ** 2 - L ** 2)) * np.cos(np.pi * d * i / L) * np.cos(
+            i * np.pi * x / L)
+        an += an_term
+    return a * (a0 / 2 + an)
+
+
+# Compute the waves
+waves = {
+    "P": compute_wave(*params["pwav"], L),
+    "T": compute_wave(*params["twav"], L),
+    "U": compute_wave(*params["uwav"], L)
+}
+
+ptu = sum(waves.values())
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(ptu)
+plt.title("PTU Waveform")
+plt.xlabel("Time (s)")
+plt.ylabel("Amplitude")
+plt.grid(True)
+plt.show()
